@@ -1,0 +1,27 @@
+<%= form_with model: @tweet do |form|  %>
+	
+		<% if @tweet.errors.any? %>
+				<div class= "bg-red-500 text-white py-3 px-4 rounded-sm mb-4 gap-2" >
+				<%  @tweet.errors.full_messages.each do |e| %>
+					<p><%= e %><p>
+				<% end %>
+				</div>
+		<% end %>
+<div class="mt-4 space-y-6">
+			<div>
+			<%= form.label :twitter_account_id %>
+			<%= form.collection_select :twitter_account_id, @twitter_accounts, :id, :username, {} ,{class: "input-field", placeholder: "Select twitter account"} %>
+			</div>
+			<%= render 'partials/connect_twitter' %>
+
+			<div>
+			<%= form.label :body %>
+			<%= form.text_area :body, class: "input-field", placeholder: "Enter tweet" %>
+			</div>
+			<div>
+			<%= form.label :published_at %>
+			<%= form.datetime_select :published_at, class: "input-field", placeholder: "Select date" %>
+			</div>
+			 <%= form.submit  "Schedule Tweet" , class: "btn-primary" %>
+</div>
+<% end %>

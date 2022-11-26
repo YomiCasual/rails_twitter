@@ -1,0 +1,22 @@
+<div>
+	<h3 class="text-lg font-bold" >Sign up</h3>
+
+		<%= form_with model: @user, url: sign_up_path, data: { turbo: false } do |form| %>
+		<div class="mt-4 space-y-6">
+			<div>
+			<%= form.label :email %>
+			<%= form.text_field :email, class: "input-field", placeholder: "Enter email" %>
+			</div>
+			<div>
+			<%= form.label :password %>
+			<%= form.password_field :password, class: "input-field", placeholder: "Enter password" %>
+			</div>
+			<div>
+			<%= form.label :password_confirmation %>
+			<%= form.password_field :password_confirmation, class: "input-field", placeholder: "Re-enter password" %>
+			</div>
+			 
+			 <%= form.submit  "Sign up" , class: "btn-primary" %>
+		</div>
+		<% end %>
+</div>

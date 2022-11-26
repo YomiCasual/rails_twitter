@@ -1,0 +1,35 @@
+
+<div>
+	<section class="flex items-center justify-between">
+		<h1 class="text-lg font-bold" >Tweets</h1>
+		<% if @twitter_accounts.any? %>
+			<%= link_to "Schedule Tweet", new_tweet_path, class: "btn-primary" %>
+		<% else %>
+			<%= render 'partials/connect_twitter' %>
+		<% end %>
+	</section>
+	<section class="mt-8 grid grid-cols-3 gap-4">
+	<% @user_tweets.each do |tweet| %>
+	<div class="border group px-4 py-4 rounded-sm hover:bg-blue-500 hover:!text-white transition-all duration-500 cursor-pointer">
+	<div class="flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<img src= <%= tweet.twitter_account.image %> class="h-5 w-5 rounded-full"   />
+			<%= link_to "@#{tweet.twitter_account.username}", "https://twitter.com/#{tweet.twitter_account.username}", target: :_blank , class: "text-sm group-hover:underline " %>
+		</div>
+			<%= button_to "Delete", tweet_path(id: tweet.id), method: :delete, form: {data: { turbo_confirm: "Are you sure"} } ,
+			class: "bg-red-500 text-white py-1 px-2 rounded-md text-xs" %>
+		</div>
+		<p class="text-lg font-bold mt-2"> <%= tweet.body %> <p>
+		<div class="flex items-center gap-2 text-xs  text-gray-500 group-hover:!text-white transition-all duration-500" >
+		<p > <%= tweet.published_at %> <p>
+		| 
+		<% if tweet.published? %>
+			<%= link_to "View Tweet", "https://twitter.com/#{tweet.twitter_account.username}/status/#{tweet.tweet_id}", target: :_blank, class: "bg-green-500 text-white py-1 px-2 rounded-md" %>
+		<% else %>
+			<p class="bg-orange-500 text-white py-1 px-2 rounded-md">Not Published</p>
+		<% end %>
+		</div>
+	</div>
+	<% end %>
+	</section>
+</div>

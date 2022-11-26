@@ -1,0 +1,18 @@
+<div class="bg-black flex justify-between py-6 px-6 text-white">
+<div class="flex items-center gap-4">
+<%= link_to "Rails Twitter", root_path, class: "text-lg font-bold"  %>
+<%= link_to "Tweets", tweets_path  %>
+<%= link_to "About", about_path  %>
+<%= link_to "Twitter Accounts", twitter_index_path  %>
+</div>
+<div class="flex items-center gap-3">
+
+<% if Current.user.present? && Current.user[:id].present? %>
+<p><%= link_to Current.user.email, edit_password_path %></p>
+<%= button_to "Log out", logout_path, method: :delete, class: "bg-white text-black rounded-md py-3 px-6"  %>
+<% else %>
+<%= link_to "Sign up", sign_up_path  %>
+<%= link_to "Login", login_path  %>
+<% end %>
+</div>
+</div>

@@ -1,0 +1,21 @@
+
+<div>
+	<section class="flex items-center justify-between">
+		<h1 class="text-lg font-bold" >Twitter Accounts</h1>
+		<%= render 'partials/connect_twitter' %>
+	</section>
+	<ul class="space-y-x  p-0">
+		<% !@twitter_accounts.nil? && @twitter_accounts.each do |twitter| %>
+
+		<li class="flex items-center gap-2">
+		<img src=<%= twitter.image %> alt="profile-image"  class="h-10 w-10 rounded-full overflow-hidden" />
+		<%= link_to "@#{twitter.username}", "https://twitter.com/#{twitter.username}", target: :_blank    %>
+
+	
+		<%= button_to "Disconnect", twitter_path(id: twitter.id), method: :delete, form: {
+			data: { turbo_confirm: "Are you sure"}
+		},  class: "btn-primary" %>
+		</li>
+		<% end %>
+	</section>
+</div>
